@@ -1,3 +1,9 @@
+/**
+ * @file Main programme - SparkBotAdv
+ * @author guillain (guillain@gmail.com)
+ * @license GPL-3.0
+ */
+
 var config = {};
 
 config.name = 'sparkBotAdv';
