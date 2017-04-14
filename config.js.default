@@ -1,0 +1,51 @@
+var config = {};
+
+config.name = 'sparkBotAdv';
+config.debug = '1';
+
+// Flint
+config.address = '0.0.0.0';
+config.port = '8080';
+
+// Spark
+config.sparkbot = 'SparkBotAdv@sparkbot.io';
+config.webhookUrl = 'http://:8081/flint';
+config.token = '';
+
+// Vote
+config.vote = {};
+config.vote.storage = 'vote';
+config.vote.help  = '\\vote|v [yes|no|later]|[result|flush|help]';
+config.vote.help += '- \\v yes';
+config.vote.help += '- \\v result';
+config.vote.help += '- \\v flush';
+config.vote.message  = 'Should we try the sushi place for lunch? \n';
+config.vote.message += '- yes \n';
+config.vote.message += '- no \n';
+config.vote.message += '- later \n\n';
+
+// Service desk
+config.SD = {};
+config.SD.storage = 'KM';
+config.SD.csv = '/var/www/sparkbot/conf/km.csv';
+//config.SD.csv = '/var/www/sparkbot/conf/km.short.csv';
+config.SD.searchlimit = '10';
+
+// Google search
+config.search = {};
+config.search.google_cse_key = '';
+config.search.google_api_key = '';
+
+// default search param
+config.search.query = '';
+config.search.host = 'www.google.com';
+config.search.limit = '10';
+config.search.lang = 'en';
+config.search.age = 'd1';
+config.search.image = '0';
+config.search.video = '0';
+config.search.hub = '0';
+config.search.servicedesk = '0';
+
+// export config
+module.exports = config;
