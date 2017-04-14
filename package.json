@@ -8,14 +8,14 @@
     "lodash": "^4.17.4",
     "redis": "^2.6.5",
     "redis-search": "^0.0.1",
-    "fs": "^0.0.2",
     "node-flint": "^4.4.5",
     "express": "^4.15.2",
     "google-images": "^2.0.0",
     "lodash": "^4.17.4",
     "node-google-translate-skidz": "^1.1.0",
     "reds": "^0.2.5",
-    "fs": "^0.0.1"
+    "fs": "^0.0.2",
+    "config": "^1.25.1"
   },
   "devDependencies": {},
   "scripts": {
