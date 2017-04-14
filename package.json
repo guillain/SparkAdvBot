@@ -21,7 +21,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "guillain sanchez",
+  "author": "guillain",
   "license": "ISC",
   "keywords": [
     "sparkbot"

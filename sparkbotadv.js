@@ -1,7 +1,7 @@
 /**
  * @file Cisco Spark Main bot
- * @author guillain <guillain.sanchez@gmail.com>
- * @license LGPL-3.0
+ * @author guillain guillain@gmail.com
+ * @license GPL-3.0
  * @features:
  * @@ Search
  * @@ AI
