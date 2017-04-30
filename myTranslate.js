@@ -33,5 +33,3 @@ exports.translate = function (bot, trigger) {
     });
   }
 };
-
-
