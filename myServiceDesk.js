@@ -87,4 +87,3 @@ testcsv = function(bot, trigger) {
     else { bot.say('* km '+config.SD.storage+' not found'); }
   });
 }
-
