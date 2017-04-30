@@ -27,7 +27,6 @@
 ## Vote
 * add vote directory
 
-
 # New to add
 * Reminder
 * Follow UP
