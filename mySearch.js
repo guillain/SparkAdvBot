@@ -106,10 +106,9 @@ exports.search = function (bot,trigger) {
       // Image
       } else if (searchImage == '1') {
         const ImagesClient = require('google-images');
-        let client = new ImagesClient(config.search.google_cse_key, config.search.google_api_key);
+        const client = new ImagesClient(config.search.google_cse_key, config.search.google_api_key);
         client.search(query, {
-    	  safe: 'yes',
-    	  page: 1
+          page: 1
         })
           .then(function (images) {
             console.log(images);
@@ -117,7 +116,7 @@ exports.search = function (bot,trigger) {
             for(var i = 0; i < images.length; i++) {
               txt  = '* width:'+images[i].width+', height:'+images[i].height+', size:'+images[i].size+'\n';
               txt += '* url:'+images[i].url;
-              bot.say({text: txt, file: images[i].thumbnail['url']});
+              bot.say({markdown: txt, file: images[i].thumbnail['url']});
             }
           });
 
@@ -141,4 +140,3 @@ exports.search = function (bot,trigger) {
       }
     }
 };
-
