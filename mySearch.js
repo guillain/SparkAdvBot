@@ -30,7 +30,7 @@ printParams = function (query,host,limit,lang,age,searchHub,searchImage,searchVi
   params += '* hub: '+searchHub+'\n';
   params += '* image: '+searchImage+'\n';
   params += '* video: '+searchVideo+'\n';
-  params += '* [*]: '+query+'\n\n';
+  params += '* query: '+query+'\n\n';
   return params;
 }
 
@@ -49,6 +49,8 @@ exports.search = function (bot,trigger) {
 
     // retrieve value of key 'htc'. When this is ran initially, this will return 'undefined'.
     var htc = bot.recall('htc');
+
+    console.log('>>> args: ' + trigger.args);
 
     // default search param
     var query = buildPhrase(trigger.args,1);
@@ -71,16 +73,15 @@ exports.search = function (bot,trigger) {
     // Parse params
     } else {
       for (i = 1; i < paramslength; i++) {
-        if      ( /image/i.test(trigger.args[i]) ) { searchImage = '1'; query = buildPhrase(trigger.args,i+2); }
-        else if ( /video/i.test(trigger.args[i]) ) { searchVideo = '1'; query = buildPhrase(trigger.args,i+2); }
-        else if ( /hub/i.test(trigger.args[i]) )   { searchHub = '1'; query = buildPhrase(trigger.args,i+2); }
-
+        if      ( /image/i.test(trigger.args[i]) ) { searchImage = '1'; query = buildPhrase(trigger.args,i+1); }
+        else if ( /video/i.test(trigger.args[i]) ) { searchVideo = '1'; query = buildPhrase(trigger.args,i+1); }
+        else if ( /hub/i.test(trigger.args[i]) )   { searchHub = '1'; query = buildPhrase(trigger.args,i+1); }
+        else if ( /lang/i.test(trigger.args[i]) )  { lang = trigger.args[i+1]; i++; i++; }
+        else if ( /age/i.test(trigger.args[i]) )   { age = trigger.args[i+1]; i++; i++; }
         else if ( /limit/i.test(trigger.args[i]) ) { 
           if    ( trigger.args[i+1] > 9 )          { limit = trigger.args[i+1]; i++; }
           else  { error += '* limit can\'t be under 10, found: '+trigger.args[i+1]+'\n\n'; i++; }
         }
-        else if ( /lang/i.test(trigger.args[i]) )  { lang = trigger.args[i+1]; i++; i++; }
-        else if ( /age/i.test(trigger.args[i]) )   { age = trigger.args[i+1]; i++; i++; }
         else if ( /host|in/i.test(trigger.args[i])){
           if    ( /^www.*/i.test(trigger.args[i+1]) ) { host = trigger.args[i+1]; i++; }
           else  { error += '* host param must be the service url, ie www.google.fr, found: '+trigger.args[i+1]+'\n\n'; i++; }
@@ -118,7 +119,6 @@ exports.search = function (bot,trigger) {
               txt += '* url:'+images[i].url;
               bot.say({text: txt, file: images[i].thumbnail['url']});
             }
-            //bot.say(tosay);
           });
 
       // Video
