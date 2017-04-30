@@ -55,3 +55,4 @@ config.search.servicedesk = '0';
 
 // export config
 module.exports = config;
+
