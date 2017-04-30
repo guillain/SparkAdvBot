@@ -36,3 +36,4 @@ case $1 in
   *) echo "command not found";;
 esac
 
+exit 0
