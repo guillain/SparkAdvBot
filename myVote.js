@@ -85,5 +85,3 @@ exports.vote = function (bot, trigger) {
     bot.say(phrase);
   }
 };
-
-
