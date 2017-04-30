@@ -95,4 +95,3 @@ closeCrisisRoom = function (bot,trigger) {
     bot.say('**Crisis Room** mode is already deactivated!');
   }
 };
-
