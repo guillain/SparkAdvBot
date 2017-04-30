@@ -63,5 +63,3 @@ exports.AI = function (bot, trigger) {
     //bot.say('You see a shimmering light, but it is growing dim');
   }
 };
-
-
