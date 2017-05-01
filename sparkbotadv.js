@@ -5,6 +5,7 @@
  * @features:
  * @@ Search
  * @@ AI
+ * @@ Bot mgr
  * @@ Crisis room
  * @@ Service Desk
  * @@ Vote
@@ -30,6 +31,7 @@ var flint = new Flint(config);
 // My additionnal features
 var myAI = require('./myAI.js');
 var myVote = require('./myVote.js');
+var myBotMgr = require('./myBotMgr.js');
 var mySearch = require('./mySearch.js');
 var myTranslate = require('./myTranslate.js');
 var myCrisisRoom = require('./myCrisisRoom.js');
@@ -80,7 +82,8 @@ flint.hears(/^\\(help|h)$/i, function(bot, trigger) {
   tosay += '* \\translate | \\t [lang In] [lang Out] * | [help] \n';
   tosay += '* * \\t en es I don\'t understand \n';
   tosay += '* * \\t fr en Merci beaucoup \n';
-  tosay += '* \\CrisisRoom [open|close|help] \n';
+  tosay += '* \\crisisroom [open|close|help] \n';
+  tosay += '* \\botmgr | \\a [list|update*|delete*] [webhook|room] [id*] \n';
   tosay += '* \\vote | \\v [res|help] \n';
   tosay += '* \\config | \\c \n';
   tosay += '* \\help | \\h \n';
@@ -128,6 +131,12 @@ flint.hears(/^\\(translate|t) .*/i, function(bot, trigger) {
 flint.hears(/^\\(vote|v).*/i, function(bot, trigger) {
   myVote.vote(bot, trigger);
 });
+
+// BotMgr
+flint.hears(/^\\(botmgr|b).*/i, function(bot, trigger) {
+  myBotMgr.botMgr(bot, trigger);
+});
+
 
 // Default for unrecognized commands is AI
 flint.hears(/.*/, function(flint, bot, trigger) {
