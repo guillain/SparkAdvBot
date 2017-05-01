@@ -9,6 +9,7 @@
     "redis": "^2",
     "redis-search": "^0",
     "node-flint": "^4",
+    "node-sparky": "^4",
     "express": "^4",
     "google-images": "^2",
     "google-search-scraper": "^0",
