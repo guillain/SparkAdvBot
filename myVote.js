@@ -11,12 +11,13 @@ var client = redis.createClient({detect_buffers: true});
 
 exports.help = function(bot) {
   var help = '**Vote** \n\n';
-  help += '@ [vote|v] [yes|no|later] | [result|flush|help] \n';
-  help += '* @ vote yes \n';
+  help += '_Description_ : Provide Vote system functionnalities as reply, flush and result \n\n';
+  help += '_Commands_ : @ [vote|v] [yes|no|later] | [result|flush|help] \n\n';
+  help += '* @ vote yes \n\n';
   help += '* @ v no \n\n';
-  help += '_Administration_ \n';
-  help += '* @ v result \n';
-  help += '* @ v flush \n';
+  help += '_Administration_ : \n\n';
+  help += '* @ v result \n\n';
+  help += '* @ v flush \n\n';
   bot.say(help);
 };
 
