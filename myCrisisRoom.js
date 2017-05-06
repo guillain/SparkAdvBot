@@ -6,9 +6,10 @@
 
 exports.help = function(bot) {
   var help = '**Crisis Room** \n\n';
-  help += '@ [crisisroom|cr] [open|close|help] \n';
-  help += '* @ crisisroom open \n';
-  help += '* @ cr close \n';
+  help += '_Description_ : Provide permanent Space follow up over _hotel_ mecanism features \n\n';
+  help += '_Commands_ : @ [crisisroom|cr] [open|close|help] \n\n';
+  help += '* @ crisisroom open \n\n';
+  help += '* @ cr close \n\n';
   bot.say(help);
 };
 
