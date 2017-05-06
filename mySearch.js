@@ -9,16 +9,17 @@ var config = require('./config');
 
 exports.help = function(bot){
   var help = '**Search** \n\n';
-  help += '@ [search|s] [*|help] \n';
-  help += '* @ search How can I use it? \n';
+  help += '_Description_ : Search engine that include as sources hub, web engine, CSV, SQL and NoSQL \n\n';
+  help += '_Commands_ : @ [search|s] [*|help] \n\n';
+  help += '* @ search How can I use it? \n\n';
   help += '* @ search in www.google.fr limit 15 lang fr age d5 I search something... \n\n';
-  help += '* @ search limit 20 15 lang fr age d5 [image|video|hub] What time is it? \n';
-  help += '* @ search image The toto\'s face \n';
-  help += '* @ search video The cat on the wall \n';
+  help += '* @ search limit 20 15 lang fr age d5 [image|video|hub] What time is it? \n\n';
+  help += '* @ search image The toto\'s face \n\n';
+  help += '* @ search video The cat on the wall \n\n';
   help += '* @ search hub How can I contact my IT? \n\n';
-  help += '_Shortcut_ \n\n';
-  help += '* @ s image My car \n';
-  help += '* @ s video My holidays \n';
+  help += '_Shortcut_ : \n\n';
+  help += '* @ s image My car \n\n';
+  help += '* @ s video My holidays \n\n';
   help += '* @ s hub My news \n\n';
   bot.say(help);
 };
@@ -75,6 +76,7 @@ exports.search = function (bot,trigger) {
     else if ( trigger.args['0'] == 'help' ) { 
       module.exports.help(bot); 
       printParams(bot,query,host,limit,lang,age,searchHub,searchImage,searchVideo);
+      return;
 
     // Parse params
     } else {
