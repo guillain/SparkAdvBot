@@ -6,8 +6,8 @@
 
 exports.help = function(bot) {
   var help = '**Artificial Inteligence** \n\n';
-  help += '* [phrase] \n\n';
-  help += 'All words can be interpreted according to the phrase sens and context \n\n';
+  help += '_Description_ : All words can be interpreted according to the phrase sens and context \n\n';
+  help += '_Commands_ : [phrase] \n\n';
   bot.say(help); 
 };
 
@@ -17,9 +17,15 @@ exports.AI = function (bot, trigger) {
   var thirdword = trigger.args['2'];
   var phrase = firstword+' '+secondword+' '+thirdword;
 
+  // Help request
+  if ( /ai/i.test(trigger.args['1']) && /help/i.test(trigger.args['2']) ) { 
+    module.exports.help(bot);
+    return;
+  }
+
   // Search negative form
   isNegative = '0';
-  if (/not|no /i.test(phrase)) { isNegative = '1'; }
+  if (/(not |no )/i.test(phrase)) { isNegative = '1'; }
 
   // Search question form
   isQuestion = '0';
