@@ -9,6 +9,17 @@ var config = require('./config');
 var redis = require("redis");
 var client = redis.createClient({detect_buffers: true});
 
+exports.help = function(bot) {
+  var help = '**Vote** \n\n';
+  help += '@ [vote|v] [yes|no|later] | [result|flush|help] \n';
+  help += '* @ vote yes \n';
+  help += '* @ v no \n\n';
+  help += '_Administration_ \n';
+  help += '* @ v result \n';
+  help += '* @ v flush \n';
+  bot.say(help);
+};
+
 printres = function (bot,trigger) {
   var res = 'Result for the current participation: \n';
   var tot = 'Total result: \n';
@@ -37,22 +48,25 @@ printres = function (bot,trigger) {
 }
 
 exports.vote = function (bot, trigger) {
+  // Remove first two args
+  trigger.args.splice(0,2);
+
   // if help cmd
-  if (/help/i.test(trigger.args['1'])) {
-    bot.say(config.vote.help);
+  if (/help/i.test(trigger.args['0'])) { 
+    module.exports.help(bot);
 
   // if (print) result cmd
-  } else if (/result/i.test(trigger.args['1'])) {
+  } else if (/result/i.test(trigger.args['0'])) {
     printres(bot,trigger);
 
   // if flush cmd
-  } else if (/flush/i.test(trigger.args['1'])) {
+  } else if (/flush/i.test(trigger.args['0'])) {
     client.del(config.vote.storage, redis.print);
     bot.say('Flush done');
 
   // if result posted
-  } else if (trigger.args['1']) {
-    if (/^(yes|no|later)$/i.test(trigger.args['1'])) {
+  } else if (trigger.args['0']) {
+    if (/^(yes|no|later)$/i.test(trigger.args['0'])) {
       client.get(config.vote.storage, function (err, votes) {
         // Check if it\'s first vote, if yes add the vote
         if (votes) {
@@ -66,17 +80,17 @@ exports.vote = function (bot, trigger) {
             }
           }
           // Add the vote
-          votes += ','+trigger.personEmail+':'+trigger.args['1'];
+          votes += ','+trigger.personEmail+':'+trigger.args['0'];
         } else {
           // Add the first vote
-          votes = trigger.personEmail+':'+trigger.args['1'];
+          votes = trigger.personEmail+':'+trigger.args['0'];
         }
         client.set(config.vote.storage, votes, redis.print);
         bot.say('Thanks for your vote! \n');
         printres(bot,trigger);
       });
     } else {
-      bot.say('Wrong reply \n\n'+config.vote.help);
+      bot.say('Wrong reply \n\nTry **@ vote help**');
     }
   } else {
     phrase  = config.vote.message+'\n';
