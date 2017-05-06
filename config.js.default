@@ -53,6 +53,10 @@ config.search.video = '0';
 config.search.hub = '0';
 config.search.servicedesk = '0';
 
+// Reporter
+config.reporter = {};
+config.reporter.tmpfile = '/tmp/reporter.csv';
+
 // export config
 module.exports = config;
 
