@@ -9,14 +9,14 @@ var config = require('./config');
 
 exports.help = function(bot){
   var help = '**Bot Manager** \n\n';
-  help += '@ [botmgr|b] [list|delete*] [webhook|room] [id*] \n';
-  help += '_Room_ \n';
-  help += '* @ b list room \n';
-  help += '* @ b delete room [id] \n\n';
-  help += '_Webhook_\n';
-  help += '* @ b list webhook \n';
-  help += '* @ b delete webhook [id] \n\n';
-
+  help += '_Description_ : Provide helpful functions to manage bot, application and user Spark accounts \n\n';
+  help += '_Commands_ : @ [botmgr|bm] [list|delete] [webhook|room] [id]* \n\n';
+  help += '_Room commands_ \n\n';
+  help += '* @ botmgr list room \n\n';
+  help += '* @ bm delete room [id] \n\n';
+  help += '_Webhook commands_ \n\n';
+  help += '* @ botmgr list webhook \n\n';
+  help += '* @ bm delete webhook [id] \n\n';
   bot.say(help);
 }
 
@@ -24,7 +24,7 @@ exports.botMgr = function (bot, trigger) {
   var tosay = '';
   var Spark = require('node-sparky');
   var spark = new Spark({ token: config.token  });
-  var helpMsg = 'Argument missing, try **@ b help** \n';
+  var helpMsg = 'Argument missing, try **@ bm help** \n';
 
   // Remove the first two args
   trigger.args.splice(0,2);
