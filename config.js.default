@@ -21,10 +21,6 @@ config.token = '';
 // Vote
 config.vote = {};
 config.vote.storage = 'vote';
-config.vote.help  = '\\vote|v [yes|no|later]|[result|flush|help]';
-config.vote.help += '- \\v yes';
-config.vote.help += '- \\v result';
-config.vote.help += '- \\v flush';
 config.vote.message  = 'Should we try the sushi place for lunch? \n';
 config.vote.message += '- yes \n';
 config.vote.message += '- no \n';
