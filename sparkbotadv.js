@@ -77,12 +77,12 @@ flint.hears(/^help.*/i, function(bot, trigger) {
 flint.hears(/^(@|SparkBotAdv) (help|h)$/i, function(bot, trigger) {
   var help = '**Spark Bot Advanced** \n\n';
   help += '_Description_ : Cisco Spark Chat Bot to provide demo and global overview of existing features \n\n';
-  help += '_Commands_ : [@|SparBotAdv] [feature] [help|option] \n\n';
+  help += '_Commands_ : [@|SparkBotAdv] [feature] [help|option] \n\n';
   help += '* **For 1:1 usage** : @ [feature] [option] \n\n';
-  help += '* **For group usage** : @SparBotAdv vote help \n\n';
+  help += '* **For group usage** : @SparkBotAdv vote help \n\n';
   help += '_Examples_ : \n\n';
   help += '* **1:1** : @ search help \n\n';
-  help += '* **Group** : @SparBotAdv search help \n\n';
+  help += '* **Group** : @SparkBotAdv search help \n\n';
   help += '_Features_ : \n\n';
   help += '* AI \n';
   help += '* Vote \n';
