@@ -33,6 +33,7 @@ var myAI = require('./myAI.js');
 var myVote = require('./myVote.js');
 var myBotMgr = require('./myBotMgr.js');
 var mySearch = require('./mySearch.js');
+var myReporter = require('./myReporter.js');
 var myTranslate = require('./myTranslate.js');
 var myCrisisRoom = require('./myCrisisRoom.js');
 var myServiceDesk = require('./myServiceDesk.js');
@@ -73,6 +74,8 @@ flint.hears(/^help.*/i, function(bot, trigger) {
 
 flint.hears(/^\\(help|h)$/i, function(bot, trigger) {
   var tosay = 'Main help page: \n';
+  tosay += '* \\reporter | \\r\n';
+  tosay += '* \\vote | \\v [res|help] \n';
   tosay += '* \\servicedesk | \\sd [*|help] \n';
   tosay += '* * \\sd How can I get my badge? \n';
   tosay += '* \\search | \\s [*|help] \n';
@@ -83,8 +86,7 @@ flint.hears(/^\\(help|h)$/i, function(bot, trigger) {
   tosay += '* * \\t en es I don\'t understand \n';
   tosay += '* * \\t fr en Merci beaucoup \n';
   tosay += '* \\crisisroom [open|close|help] \n';
-  tosay += '* \\botmgr | \\a [list|update*|delete*] [webhook|room] [id*] \n';
-  tosay += '* \\vote | \\v [res|help] \n';
+  tosay += '* \\botmgr | \\b [list|delete*] [webhook|room] [id*] \n';
   tosay += '* \\config | \\c \n';
   tosay += '* \\help | \\h \n';
   tosay += '* default: AI \n';
@@ -137,6 +139,10 @@ flint.hears(/^\\(botmgr|b).*/i, function(bot, trigger) {
   myBotMgr.botMgr(bot, trigger);
 });
 
+// Reporter
+flint.hears(/^\\(reporter|r).*/i, function(bot, trigger) {
+  myReporter.reporter(bot, trigger);
+});
 
 // Default for unrecognized commands is AI
 flint.hears(/.*/, function(flint, bot, trigger) {
