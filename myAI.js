@@ -4,6 +4,13 @@
  * @license GPL-3.0
  */
 
+exports.help = function(bot) {
+  var help = '**Artificial Inteligence** \n\n';
+  help += '* [phrase] \n\n';
+  help += 'All words can be interpreted according to the phrase sens and context \n\n';
+  bot.say(help); 
+};
+
 exports.AI = function (bot, trigger) {
   var firstword = trigger.args['0'];
   var secondword = trigger.args['1'];
