@@ -7,22 +7,25 @@
 // Load config
 var config = require('./config');
 
-help = function(query,host,limit,lang,age,searchHub,searchImage,searchVideo) {
-  help += printParams(query,host,limit,lang,age,searchHub,searchImage,searchVideo);
-  help += '* * The query phrase must be placed at the end and if necessary the media type before \n';
-  help += '\nie: \n';
-  help += '* \\search How can I use it? \n';
-  help += '* \\search in www.google.fr limit 15 lang fr age d5 I search something... \n\n';
-  help += '* \\search limit 20 15 lang fr age d5 [image|video|hub] What time is it? \n';
-  help += '* \\search image The toto\'s face \n';
-  help += '* \\search video The cat on the wall \n';
-  help += '* \\search hub How can I contact my IT? \n';
-  return help;
-}
+exports.help = function(bot){
+  var help = '**Search** \n\n';
+  help += '@ [search|s] [*|help] \n';
+  help += '* @ search How can I use it? \n';
+  help += '* @ search in www.google.fr limit 15 lang fr age d5 I search something... \n\n';
+  help += '* @ search limit 20 15 lang fr age d5 [image|video|hub] What time is it? \n';
+  help += '* @ search image The toto\'s face \n';
+  help += '* @ search video The cat on the wall \n';
+  help += '* @ search hub How can I contact my IT? \n\n';
+  help += '_Shortcut_ \n\n';
+  help += '* @ s image My car \n';
+  help += '* @ s video My holidays \n';
+  help += '* @ s hub My news \n\n';
+  bot.say(help);
+};
 
-printParams = function (query,host,limit,lang,age,searchHub,searchImage,searchVideo) {
+printParams = function (bot,query,host,limit,lang,age,searchHub,searchImage,searchVideo) {
   // create and complete search params msg
-  params = 'Search Params: \n';
+  params = '**Search Params** \n\n';
   params += '* host or in: '+host+'\n';
   params += '* limit: '+limit+'\n';
   params += '* lang: '+lang+'\n';
@@ -31,8 +34,8 @@ printParams = function (query,host,limit,lang,age,searchHub,searchImage,searchVi
   params += '* image: '+searchImage+'\n';
   params += '* video: '+searchVideo+'\n';
   params += '* query: '+query+'\n\n';
-  return params;
-}
+  bot.say(params);
+};
 
 buildPhrase = function (args, offset){
   phrase = '';
@@ -40,11 +43,14 @@ buildPhrase = function (args, offset){
     phrase += ' '+args[i];
   }
   return phrase;
-}
+};
 
 exports.search = function (bot,trigger) {
     var tosay = '';
     var error = '';
+
+    // Remove the first two args
+    trigger.args.splice(0,2);
     var paramslength = trigger.args.length;
 
     // retrieve value of key 'htc'. When this is ran initially, this will return 'undefined'.
@@ -53,7 +59,7 @@ exports.search = function (bot,trigger) {
     console.log('>>> args: ' + trigger.args);
 
     // default search param
-    var query = buildPhrase(trigger.args,1);
+    var query = buildPhrase(trigger.args,0);
     var host = config.search.host;
     var limit = config.search.limit;
     var lang = config.search.lang;
@@ -63,16 +69,16 @@ exports.search = function (bot,trigger) {
     var searchHub = config.search.hub;
 
     // No params
-    if ( query == '' ) {
-      error += '* No parameter found';
+    if ( query == '' ) { error += '* No parameter found'; }
 
     // help
-    } else if ( query == 'help' ) {
-      bot.say(help('',host,limit,lang,age,searchHub,searchImage,searchVideo));
+    else if ( trigger.args['0'] == 'help' ) { 
+      module.exports.help(bot); 
+      printParams(bot,query,host,limit,lang,age,searchHub,searchImage,searchVideo);
 
     // Parse params
     } else {
-      for (i = 1; i < paramslength; i++) {
+      for (i = 0; i < paramslength; i++) {
         if      ( /image/i.test(trigger.args[i]) ) { searchImage = '1'; query = buildPhrase(trigger.args,i+1); }
         else if ( /video/i.test(trigger.args[i]) ) { searchVideo = '1'; query = buildPhrase(trigger.args,i+1); }
         else if ( /hub/i.test(trigger.args[i]) )   { searchHub = '1'; query = buildPhrase(trigger.args,i+1); }
@@ -86,7 +92,7 @@ exports.search = function (bot,trigger) {
           if    ( /^www.*/i.test(trigger.args[i+1]) ) { host = trigger.args[i+1]; i++; }
           else  { error += '* host param must be the service url, ie www.google.fr, found: '+trigger.args[i+1]+'\n\n'; i++; }
         } else  {
-          if (i == 1) {
+          if (i == 0) {
             query = trigger.args[i];
           } else {
             query += ' '+trigger.args[i];
@@ -95,7 +101,7 @@ exports.search = function (bot,trigger) {
       }
   
       // create and complete output msg with the search params
-      tosay  = printParams(query,host,limit,lang,age,searchHub,searchImage,searchVideo);
+      printParams(bot,query,host,limit,lang,age,searchHub,searchImage,searchVideo);
       tosay += 'Search Results: \n';
       bot.say(tosay);
 
