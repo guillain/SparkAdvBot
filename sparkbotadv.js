@@ -10,6 +10,8 @@
  * @@ Service Desk
  * @@ Vote
  * @@ Translate
+ * @@ Reporter
+ * @@ Config
  */
 
 // Import module
@@ -33,6 +35,7 @@ var myAI = require('./myAI.js');
 var myVote = require('./myVote.js');
 var myBotMgr = require('./myBotMgr.js');
 var mySearch = require('./mySearch.js');
+var myConfig = require('./myConfig.js');
 var myReporter = require('./myReporter.js');
 var myTranslate = require('./myTranslate.js');
 var myCrisisRoom = require('./myCrisisRoom.js');
@@ -51,11 +54,10 @@ flint.messageFormat = 'markdown';
 flint.on('initialized', function() {
   flint.debug('initialized %s rooms', flint.bots.length);
 });
-/*
 flint.on('message', function(bot, trigger, id) {
   flint.debug('"%s" said "%s" in room "%s"', trigger.personEmail, trigger.text, trigger.roomTitle);
 });
-*/
+
 // Recall fct
 flint.on('spawn', bot => {
   // Crisis Room recall fct
@@ -67,80 +69,65 @@ app.post('/flint', webhook(flint) );
 
 // Help fct
 flint.hears(/^help.*/i, function(bot, trigger) {
-  tosay  = 'You should try "\\help" \n\n';
-  tosay += 'In fact \\ indicates to the system that you send a command. \n\n';
+  tosay  = 'You should try "@ help" \n\n';
+  tosay += 'In fact **@** indicates to the system that you send a command. \n\n';
   bot.say(tosay);
 });
 
-flint.hears(/^\\(help|h)$/i, function(bot, trigger) {
-  var tosay = 'Main help page: \n';
-  tosay += '* \\reporter | \\r\n';
-  tosay += '* \\vote | \\v [res|help] \n';
-  tosay += '* \\servicedesk | \\sd [*|help] \n';
-  tosay += '* * \\sd How can I get my badge? \n';
-  tosay += '* \\search | \\s [*|help] \n';
-  tosay += '* * \\s image My car \n';
-  tosay += '* * \\s video My holidays \n';
-  tosay += '* * \\s hub My news \n';
-  tosay += '* \\translate | \\t [lang In] [lang Out] * | [help] \n';
-  tosay += '* * \\t en es I don\'t understand \n';
-  tosay += '* * \\t fr en Merci beaucoup \n';
-  tosay += '* \\crisisroom [open|close|help] \n';
-  tosay += '* \\botmgr | \\b [list|delete*] [webhook|room] [id*] \n';
-  tosay += '* \\config | \\c \n';
-  tosay += '* \\help | \\h \n';
-  tosay += '* default: AI \n';
-  bot.say(tosay);
+flint.hears(/^@ (help|h)$/i, function(bot, trigger) {
+  myAI.help(bot);
+  myVote.help(bot);
+  mySearch.help(bot);
+  myConfig.help(bot);
+  myBotMgr.help(bot);
+  myTranslate.help(bot);
+  myServiceDesk.help(bot);
+  myReporter.help(bot);
+  myCrisisRoom.help(bot);
 });
 
-// Reply the conf to the 'config'
-flint.hears(/^\\(config|c)$/i, function(bot, trigger) {
-  var tosay = 'Current config: \n';
-  tosay += '* Server: \n';
-  tosay += '* * port:'+config.port+'\n';
-  tosay += '* * address:'+config.address+'\n';
-  tosay += '* * debug:'+config.debug+'\n';
-  tosay += '* Spark: \n';
-  tosay += '* * sparkbot: '+config.sparkbot+'\n';
-  tosay += '* * webhookUrl: '+config.webhookUrl+'\n';
-  tosay += '* * webhookRequestJSONLocation: '+config.webhookRequestJSONLocation+'\n';
-  tosay += '* * removeWebhooksOnStart: '+config.removeWebhooksOnStart+'\n';
-  tosay += '* * token: '+config.token+'\n';
-  bot.say(tosay);
+// Test
+flint.hears(/^@ test .*/i, function(bot, trigger) {
+  console.log('>>> trigger.args:' + trigger.args);
+});
+
+// Config
+flint.hears(/^@ (config|c)$/i, function(bot, trigger) {
+  myConfig.config(bot, trigger);
 });
 
 // ServiceDesk$
-flint.hears(/^\\(servicedesk|sd) .*/i, function(bot, trigger) {
+flint.hears(/^@ (servicedesk|sd) .*/i, function(bot, trigger) {
   myServiceDesk.servicedesk(bot, trigger);
 });
 
 // CrisisRoom 
-flint.hears(/^\\CrisisRoom .*/i, function(bot, trigger) {
+flint.hears(/^@ (crisisroom|cr) .*/i, function(bot, trigger) {
   myCrisisRoom.CrisisRoom(bot, trigger);
 });
 
 // Import search functions
-flint.hears(/^\\(search|s) .*/i, function(bot, trigger) {
+flint.hears(/^@ (search|s) .*/i, function(bot, trigger) {
   mySearch.search(bot, trigger);
 });
 
 // Import translate functions
-flint.hears(/^\\(translate|t) .*/i, function(bot, trigger) {
+flint.hears(/^@ (translate|t) .*/i, function(bot, trigger) {
   myTranslate.translate(bot, trigger);
 });
 
 // Vote
-flint.hears(/^\\(vote|v).*/i, function(bot, trigger) {
+flint.hears(/^@ (vote|v).*/i, function(bot, trigger) {
   myVote.vote(bot, trigger);
 });
 
 // BotMgr
-flint.hears(/^\\(botmgr|b).*/i, function(bot, trigger) {
+flint.hears(/^@ (botmgr|b).*/i, function(bot, trigger) {
   myBotMgr.botMgr(bot, trigger);
 });
 
 // Reporter
-flint.hears(/^\\(reporter|r).*/i, function(bot, trigger) {
+flint.hears(/^@ (reporter|r).*/i, function(bot, trigger) {
   myReporter.reporter(bot, trigger);
 });
 
