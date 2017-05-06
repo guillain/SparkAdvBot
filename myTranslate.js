@@ -6,9 +6,10 @@
 
 exports.help = function(bot) {
   var help  = '**Translate** \n\n';
-  help += '@ [translate|t] [lang in] [lang out] [*/phrase] \n';
-  help += '* @ translate en fr I like it! \n';
-  help += '* @ t fr ge rendez-vous demain \n';
+  help += '_Description_ : Text translation on line via a chat bot \n\n';
+  help += '_Commands_ : @ [translate|t] [lang in] [lang out] [*/phrase] \n\n';
+  help += '* @ translate en fr I like it! \n\n';
+  help += '* @ t fr ge rendez-vous demain \n\n';
   help += '_lang_: en, es, fr, ge \n\n';
   bot.say(help);
 }
