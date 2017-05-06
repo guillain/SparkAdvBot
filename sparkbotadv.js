@@ -69,65 +69,76 @@ app.post('/flint', webhook(flint) );
 
 // Help fct
 flint.hears(/^help.*/i, function(bot, trigger) {
-  tosay  = 'You should try "@ help" \n\n';
+  var tosay = 'You should try **@ help** or **@ [feature] help** \n\n';
   tosay += 'In fact **@** indicates to the system that you send a command. \n\n';
   bot.say(tosay);
 });
 
-flint.hears(/^@ (help|h)$/i, function(bot, trigger) {
-  myAI.help(bot);
-  myVote.help(bot);
-  mySearch.help(bot);
-  myConfig.help(bot);
-  myBotMgr.help(bot);
-  myTranslate.help(bot);
-  myServiceDesk.help(bot);
-  myReporter.help(bot);
-  myCrisisRoom.help(bot);
+flint.hears(/^(@|SparkBotAdv) (help|h)$/i, function(bot, trigger) {
+  var help = '**Spark Bot Advanced** \n\n';
+  help += '_Description_ : Cisco Spark Chat Bot to provide demo and global overview of existing features \n\n';
+  help += '_Commands_ : [@|SparBotAdv] [feature] [help|option] \n\n';
+  help += '* **For 1:1 usage** : @ [feature] [option] \n\n';
+  help += '* **For group usage** : @SparBotAdv vote help \n\n';
+  help += '_Examples_ : \n\n';
+  help += '* **1:1** : @ search help \n\n';
+  help += '* **Group** : @SparBotAdv search help \n\n';
+  help += '_Features_ : \n\n';
+  help += '* AI \n';
+  help += '* Vote \n';
+  help += '* Search \n';
+  help += '* Config \n';
+  help += '* BotMgr \n';
+  help += '* Reporter \n';
+  help += '* Translate \n';
+  help += '* CrisisRoom \n\n';
+  help += '* ServiceDesk \n';
+  bot.say(help);
 });
 
 // Test
-flint.hears(/^@ test .*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) test .*/i, function(bot, trigger) {
   console.log('>>> trigger.args:' + trigger.args);
+  //bot.say(trigger.args);
 });
 
 // Config
-flint.hears(/^@ (config|c)$/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (config|c) .*/i, function(bot, trigger) {
   myConfig.config(bot, trigger);
 });
 
 // ServiceDesk$
-flint.hears(/^@ (servicedesk|sd) .*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (servicedesk|sd) .*/i, function(bot, trigger) {
   myServiceDesk.servicedesk(bot, trigger);
 });
 
 // CrisisRoom 
-flint.hears(/^@ (crisisroom|cr) .*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (crisisroom|cr) .*/i, function(bot, trigger) {
   myCrisisRoom.CrisisRoom(bot, trigger);
 });
 
 // Import search functions
-flint.hears(/^@ (search|s) .*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (search|s) .*/i, function(bot, trigger) {
   mySearch.search(bot, trigger);
 });
 
 // Import translate functions
-flint.hears(/^@ (translate|t) .*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (translate|t) .*/i, function(bot, trigger) {
   myTranslate.translate(bot, trigger);
 });
 
 // Vote
-flint.hears(/^@ (vote|v).*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (vote|v).*/i, function(bot, trigger) {
   myVote.vote(bot, trigger);
 });
 
 // BotMgr
-flint.hears(/^@ (botmgr|b).*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (botmgr|bm).*/i, function(bot, trigger) {
   myBotMgr.botMgr(bot, trigger);
 });
 
 // Reporter
-flint.hears(/^@ (reporter|r).*/i, function(bot, trigger) {
+flint.hears(/^(@|SparkBotAdv) (reporter|r).*/i, function(bot, trigger) {
   myReporter.reporter(bot, trigger);
 });
 
