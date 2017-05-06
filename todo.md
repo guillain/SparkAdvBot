@@ -1,7 +1,10 @@
 # ToDo
 
-* refresh google lib
-* add new search feature
+# New to add
+* Reminder
+* Follow UP
+* Task
+* Calendar
 
 ## Hub research ( waiting hub availabilty for finalisation )
 * add category in search filter
@@ -27,8 +30,7 @@
 ## Vote
 * add vote directory
 
-# New to add
-* Reminder
-* Follow UP
-* Task
-* Calendar
+## Reporter
+* add export format selection (pdf, csv, ...)
+* add file export (archive creation and upload)
+
