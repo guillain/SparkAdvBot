@@ -4,17 +4,23 @@
  * @license GPL-3.0
  */
 
+exports.help = function(bot) {
+  var help = '**Crisis Room** \n\n';
+  help += '@ [crisisroom|cr] [open|close|help] \n';
+  help += '* @ crisisroom open \n';
+  help += '* @ cr close \n';
+  bot.say(help);
+};
+
 // The Flint mgr event
 exports.CrisisRoom = function (bot, trigger) {
-  if        (/help/i.test(trigger.args['1'])){
-    bot.say(trigger.args['0']+' [open|close|help]');
-  } else if (/open/i.test(trigger.args['1'])){
-    openCrisisRoom(bot,trigger);
-  } else if (/close/i.test(trigger.args['1'])){
-    closeCrisisRoom(bot,trigger);
-  } else {
-    bot.say('I\'ve not understood your command for the Crisis Room');
-  }
+  // Remove the first two args
+  trigger.args.splice(0,2);
+  
+  if      (/help/i.test(trigger.args['0'])) { module.exports.help(bot); }
+  else if (/open/i.test(trigger.args['0'])) { openCrisisRoom(bot,trigger); }
+  else if (/close/i.test(trigger.args['0'])){ closeCrisisRoom(bot,trigger); }
+  else    { bot.say('I\'ve not understood your command for the Crisis Room'); }
 };
 
 // The Flint event is expecting a function that has a bot, person, and id parameter.
