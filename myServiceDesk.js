@@ -15,10 +15,24 @@ var search = Search.createSearch(config.SD.storage);
 
 var fs = require('fs');
 
+exports.help = function(bot) {
+  var help = '**Service Desk** \n\n';
+  help += '@ [servicedesk|sd] [*|loadcsv|testcsv|help] \n';
+  help += '* @ servicedesk WebEx meeting \n';
+  help += '* @ sd WebEx delegation \n\n';
+  help += '_Admin tools_ \n';
+  help += '* @ sd loadcsv \n';
+  help += '* @ sd testcsv \n';
+  bot.say(help);
+};
+
 exports.servicedesk = function (bot, trigger) {
-  if      (/help/i.test(trigger.args['1']))      { bot.say('\\servicedesk|sd [*|loadcsv|testcsv|help]'); }
-  else if (/^loadcsv$/i.test(trigger.args['1'])) { loadcsv(bot, trigger); }
-  else if (/^testcsv$/i.test(trigger.args['1'])) { testcsv(bot, trigger); }
+  // Remove the first two args
+  trigger.args.splice(0,2);
+  
+  if      (/help/i.test(trigger.args['0']))      { module.exports.help(bot); }
+  else if (/^loadcsv$/i.test(trigger.args['0'])) { loadcsv(bot, trigger); }
+  else if (/^testcsv$/i.test(trigger.args['0'])) { testcsv(bot, trigger); }
   else {                                          mysearch(bot, trigger); }
 };
 
@@ -26,8 +40,8 @@ mysearch = function(bot, trigger) {
   j = 0;
   var phrase = '';
   var tosay = 'Search result \n';
-  for (i = 1; i < trigger.args.length; i++) {
-    if(i == 1) { phrase  = trigger.args[i]; }
+  for (i = 0; i < trigger.args.length; i++) {
+    if(i == 0) { phrase  = trigger.args[i]; }
     else       { phrase += ' '+trigger.args[i]; }
   }
 
