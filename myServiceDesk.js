@@ -17,12 +17,13 @@ var fs = require('fs');
 
 exports.help = function(bot) {
   var help = '**Service Desk** \n\n';
-  help += '@ [servicedesk|sd] [*|loadcsv|testcsv|help] \n';
-  help += '* @ servicedesk WebEx meeting \n';
+  help += '_Description_ : Provide Q&A feature. Source can come from web motor engine, hub, CSV, SQL/NoSQL \n\n';
+  help += '_Commands_ : @ [servicedesk|sd] [*|loadcsv|testcsv|help] \n\n';
+  help += '* @ servicedesk WebEx meeting \n\n';
   help += '* @ sd WebEx delegation \n\n';
-  help += '_Admin tools_ \n';
-  help += '* @ sd loadcsv \n';
-  help += '* @ sd testcsv \n';
+  help += '_Admin tools_ : \n\n';
+  help += '* @ sd loadcsv \n\n';
+  help += '* @ sd testcsv \n\n';
   bot.say(help);
 };
 
