@@ -11,8 +11,9 @@ You will found some features that cna be integrated and used with this Business 
 * * internet (host selection)
 * * * image
 * * * video
-* **AI**: 
-* **Crisis room**:
+* **AI**: Artificial Intreligece to discuss as human
+* **Crisis room**: Crisis Room creation and people management
+* **Alert**: Send alert message to all connected rooms of the bot
 * **Reporter**: Bot that provides export of the room content
 * **Service Desk**: Bot that provides the Q&A standard features used by Service Desk team
 * * Can incldue also bigData for analytics and create/propose new reports/KM
