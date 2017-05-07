@@ -53,6 +53,10 @@ config.search.servicedesk = '0';
 config.reporter = {};
 config.reporter.tmpfile = '/tmp/reporter.csv';
 
+// Alert
+config.alert = {};
+config.alert.code = '1234';
+
 // export config
 module.exports = config;
 
