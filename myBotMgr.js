@@ -45,6 +45,7 @@ exports.botMgr = function (bot, trigger) {
     }
     if (target == 'room' && action == 'delete') {
       if (trigger.args.length < 3) { tosay = helpMsg; }
+      else if (trigger.args.length == 3) { tosay = 'You must be admin \n'; }
       else {
         spark.roomRemove(id)
           .then(function(rooms) { bot.say('Room deleted \n'); })
@@ -60,6 +61,7 @@ exports.botMgr = function (bot, trigger) {
     }
     if (target == 'webhook' && action == 'delete') {
       if (trigger.args.length < 3) { tosay = helpMsg; }
+      else if (trigger.args.length == 3) { tosay = 'You must be admin \n'; }
       else {
         spark.webhookRemove(id)
           .then(function(rooms) { bot.say('Webhook deleted \n'); })
