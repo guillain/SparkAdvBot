@@ -33,6 +33,7 @@ var flint = new Flint(config);
 // My additionnal features
 var myAI = require('./myAI.js');
 var myVote = require('./myVote.js');
+var myAlert = require('./myAlert.js');
 var myBotMgr = require('./myBotMgr.js');
 var mySearch = require('./mySearch.js');
 var myConfig = require('./myConfig.js');
@@ -77,7 +78,7 @@ flint.hears(/^help.*/i, function(bot, trigger) {
 flint.hears(/^(@|SparkBotAdv) (help|h)$/i, function(bot, trigger) {
   var help = '**Spark Bot Advanced** \n\n';
   help += '_Description_ : Cisco Spark Chat Bot to provide demo and global overview of existing features \n\n';
-  help += '_Commands_ : [@|SparkBotAdv] [feature] [help|option] \n\n';
+  help += '_Commands_ : [@|@SparkBotAdv] [feature] [help|option] \n\n';
   help += '* **For 1:1 usage** : @ [feature] [option] \n\n';
   help += '* **For group usage** : @SparkBotAdv vote help \n\n';
   help += '_Examples_ : \n\n';
@@ -86,6 +87,7 @@ flint.hears(/^(@|SparkBotAdv) (help|h)$/i, function(bot, trigger) {
   help += '_Features_ : \n\n';
   help += '* AI \n';
   help += '* Vote \n';
+  help += '* Alert \n';
   help += '* Search \n';
   help += '* Config \n';
   help += '* BotMgr \n';
@@ -100,6 +102,11 @@ flint.hears(/^(@|SparkBotAdv) (help|h)$/i, function(bot, trigger) {
 flint.hears(/^(@|SparkBotAdv) test .*/i, function(bot, trigger) {
   console.log('>>> trigger.args:' + trigger.args);
   //bot.say(trigger.args);
+});
+
+// Alert
+flint.hears(/^(@|SparkBotAdv) alert .*/i, function(bot, trigger) {
+  myAlert.alert(bot, trigger);
 });
 
 // Config
