@@ -18,6 +18,14 @@ config.sparkbot = 'SparkBotAdv@sparkbot.io';
 config.webhookUrl = 'http://:8081/flint';
 config.token = '';
 
+// BigData connector
+config.bigdata = {};
+config.bigdata.enable = true;
+config.bigdata.type = 'tcp';
+config.bigdata.host = '';
+config.bigdata.port = '5044';
+config.bigdata.auth = 'username:password';
+
 // Vote
 config.vote = {};
 config.vote.storage = 'vote';
