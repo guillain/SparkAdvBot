@@ -16,7 +16,8 @@
     "node-google-translate-skidz": "^1",
     "reds": "^0.2.5",
     "fs": "^0",
-    "config": "^1"
+    "config": "^1",
+    "logstash-client": "^1.1.1"
   },
   "devDependencies": {},
   "scripts": {
