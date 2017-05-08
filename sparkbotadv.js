@@ -18,9 +18,10 @@
 var Flint = require('node-flint');
 var webhook = require('node-flint/webhook');
 var RedisStore = require('node-flint/storage/redis'); // load driver
-var express = require('express');
+var Logstash = require('logstash-client');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
+var express = require('express');
 var app = express();
 app.use(bodyParser.json());
 
@@ -55,8 +56,22 @@ flint.messageFormat = 'markdown';
 flint.on('initialized', function() {
   flint.debug('initialized %s rooms', flint.bots.length);
 });
+
+// Catch all messages get for the bot
 flint.on('message', function(bot, trigger, id) {
+  // Debug
   flint.debug('"%s" said "%s" in room "%s"', trigger.personEmail, trigger.text, trigger.roomTitle);
+
+  // BigData storage
+  if (config.bigdata.enable == true) {
+    var logstash = new Logstash({
+      type: config.bigdata.type,
+      host: config.bigdata.host,
+      //auth: config.bigdata.auth,
+      port: config.bigdata.port
+    });
+    logstash.send(trigger);
+  }
 });
 
 // Recall fct
