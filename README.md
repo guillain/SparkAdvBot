@@ -4,6 +4,12 @@ Advanced Spark bot that provide many feature for **demo purpose**
 The main idea is so to share _what is possible_ with a chat bot and [Cisco Spark](https://web.ciscospark.com).
 You will found some features that cna be integrated and used with this Business messaging.
 
+# BigData with Logstash connector embeded
+Active it in the configuration file
+```bash
+config.js
+> config.bigdata.enable = true;
+```
 ## Features
 * **Search**: Bot search functionnalities. The diea is to build a common search engine and have differents connector.
 * * hub
