@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.0.3"
+VERSION="1.0.4"
 USER='guillain'
 
 add(){
@@ -21,6 +21,7 @@ add myBotMgr.js         "Bot mgr functions, ${VERSION}"
 add mySearch.js		"Search functions, ${VERSION}"
 add myTranslate.js	"Functions for translation, ${VERSION}"
 add myConfig.js 	"Config display functions, ${VERSION}"
+add myReporter.js       "Dump functions, ${VERSION}"
 add app 		"Shell script to run the app, ${VERSION}"
 add LICENSE		"License file"
 add README.md		"readme file, ${VERSION}"
