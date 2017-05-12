@@ -15,7 +15,7 @@ config.port = '8080';
 
 // Spark
 config.sparkbot = 'SparkBotAdv@sparkbot.io';
-config.webhookUrl = 'http://:8081/flint';
+config.webhookUrl = 'http://'+config.address+':'+config.port+'/flint';
 config.token = '';
 
 // BigData connector
