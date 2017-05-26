@@ -64,13 +64,19 @@ flint.on('message', function(bot, trigger, id) {
 
   // BigData storage
   if (config.bigdata.enable == true) {
-    var logstash = new Logstash({
-      type: config.bigdata.type,
-      host: config.bigdata.host,
-      //auth: config.bigdata.auth,
-      port: config.bigdata.port
-    });
-    logstash.send(trigger);
+    var message = {
+      'timestamp': new Date(),
+      'message': trigger.text,
+      'from': trigger.personEmail,
+      'spaceid': trigger.roomId,
+      'spacename': trigger.roomTitle,
+      'level': 'info',
+      'type': 'bot'
+    };
+
+    var logstash = new Logstash({type:config.bigdata.type,host: config.bigdata.host, port: config.bigdata.port});
+    logstash.send(message);
+    flint.debug('Logstash recording should be ok');
   }
 });
 
@@ -92,7 +98,7 @@ flint.hears(/^help.*/i, function(bot, trigger) {
 
 flint.hears(/^(@|SparkBotAdv) (help|h)$/i, function(bot, trigger) {
   var help = '**Spark Bot Advanced** \n\n';
-  help += '_Description_ : Cisco Spark Chat Bot to provide demo and global overview of existing features \n\n';
+  help += '_Description_ : Cisco Spark Chat Bot to provide demo and global overview of existing features. Logstash as bigData NoSQL connector is provided for bot chat excahnge \n\n';
   help += '_Commands_ : [@|@SparkBotAdv] [feature] [help|option] \n\n';
   help += '* **For 1:1 usage** : @ [feature] [option] \n\n';
   help += '* **For group usage** : @SparkBotAdv vote help \n\n';
