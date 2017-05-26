@@ -5,6 +5,8 @@
 * Follow UP
 * Task
 * Calendar
+* Audit (chat miroring)
+* event manager
 
 ## Hub research ( waiting hub availabilty for finalisation )
 * add category in search filter
