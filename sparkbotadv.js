@@ -44,7 +44,7 @@ var myCrisisRoom = require('./myCrisisRoom.js');
 var myServiceDesk = require('./myServiceDesk.js');
 
 // Use redis storage
-flint.storageDriver(new RedisStore('redis://127.0.0.1')); // select driver
+flint.storageDriver(new RedisStore('redis://'+config.db.host+':'+config.db.port)); // select driver
 
 // Start flint
 flint.start();

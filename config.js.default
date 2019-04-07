@@ -13,6 +13,10 @@ config.debug = '1';
 config.address = '0.0.0.0';
 config.port = '8080';
 
+// Redis
+config.db = {};
+config.db.host = '127.0.0.1';
+
 // Spark
 config.sparkbot = 'SparkBotAdv@sparkbot.io';
 config.webhookUrl = 'http://'+config.address+':'+config.port+'/flint';
